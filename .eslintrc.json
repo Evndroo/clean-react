@@ -6,6 +6,15 @@
         "project": "./tsconfig-eslint.json"
     },
     "rules": {
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+              "selector": "memberLike",
+              "modifiers": ["private"],
+              "format": ["camelCase"],
+              "leadingUnderscore": "require"
+            }
+        ],
         "@typescript-eslint/consistent-type-definitions": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/no-floating-promises": "off",
