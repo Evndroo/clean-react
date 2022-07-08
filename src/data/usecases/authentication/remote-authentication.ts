@@ -4,7 +4,7 @@ import {
   HttpStatusCode,
 } from "@/data/protocols/http/http-response";
 import { InvalidCredentialsError } from "@/domain/erros/invalid-credentials-error";
-import { AuthenticationParams } from "@/domain/usecasas/authentication";
+import { AuthenticationParams } from "@/domain/usecases/authentication";
 
 export class RemoteAuthentication {
   constructor(
