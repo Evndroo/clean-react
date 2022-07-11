@@ -33,10 +33,18 @@ describe("Remote authentication", () => {
     const url = faker.internet.url();
 
     const { sut, httpPostClientSpy } = makeSut(url);
+    await sut.auth(mockAuthentication());
+
+    expect(httpPostClientSpy.url).toBe(url);
+  });
+
+  it("should call httpClient with correct body", async () => {
+    const url = faker.internet.url();
+
+    const { sut, httpPostClientSpy } = makeSut(url);
     const authenticationParams = mockAuthentication();
     await sut.auth(authenticationParams);
 
-    expect(httpPostClientSpy.url).toBe(url);
     expect(httpPostClientSpy.body).toEqual(authenticationParams);
   });
 
