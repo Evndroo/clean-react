@@ -7,14 +7,19 @@ import { mockAuthentication } from "@/domain/test/mock-authentication";
 
 import { RemoteAuthentication } from "./remote-authentication";
 import { UnexpectedError } from "@/domain/erros/unexpected-error";
+import { AuthenticationParams } from "@/domain/usecases/authentication";
+import { AccountModel } from "@/domain/models/account-model";
 
 type SutTypes = {
   sut: RemoteAuthentication;
-  httpPostClientSpy: HttpPostClientSpy;
+  httpPostClientSpy: HttpPostClientSpy<AuthenticationParams, AccountModel>;
 };
 
 const makeSut = (url: string = faker.internet.url()): SutTypes => {
-  const httpPostClientSpy = new HttpPostClientSpy();
+  const httpPostClientSpy = new HttpPostClientSpy<
+    AuthenticationParams,
+    AccountModel
+  >();
   const sut = new RemoteAuthentication(url, httpPostClientSpy);
 
   return { sut, httpPostClientSpy };
@@ -25,9 +30,11 @@ describe("Remote authentication", () => {
     const url = faker.internet.url();
 
     const { sut, httpPostClientSpy } = makeSut(url);
-    await sut.auth(mockAuthentication());
+    const authenticationParams = mockAuthentication();
+    await sut.auth(authenticationParams);
 
     expect(httpPostClientSpy.url).toBe(url);
+    expect(httpPostClientSpy.body).toEqual(authenticationParams);
   });
 
   it("should throw InvalidCredentialsError if HttpPostClient returns 401", async () => {
