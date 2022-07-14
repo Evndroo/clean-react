@@ -1,3 +1,4 @@
+import { HttpPostParams } from "@/data/protocols/http";
 import { faker } from "@faker-js/faker";
 import axios from "axios";
 
@@ -10,15 +11,20 @@ const makeSut = (): AxiosHttpClient => {
   return new AxiosHttpClient();
 };
 
+const mockPostRequest = (): HttpPostParams<any> => {
+  return {
+    url: faker.internet.url(),
+    body: faker.science.unit(),
+  };
+};
+
 describe("AxiosHttpClient", () => {
-  it("Should call axios with correct url and http verb", async () => {
-    const url = faker.internet.url();
+  it.only("Should call axios with correct url and http verb", async () => {
+    const request = mockPostRequest();
     const sut = makeSut();
 
-    sut.post({
-      url: url,
-    });
+    sut.post(request);
 
-    expect(mockedAxios.post).toHaveBeenCalledWith(url);
+    expect(mockedAxios.post).toHaveBeenCalledWith(request.url);
   });
 });
