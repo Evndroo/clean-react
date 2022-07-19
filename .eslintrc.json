@@ -1,7 +1,14 @@
 {
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "extends": [
-        "standard-with-typescript"
+        "standard-with-typescript",
+        "plugin:react/recommended"
     ],
+    "plugins": ["react"],
     "parserOptions": {
         "project": "./tsconfig-eslint.json"
     },
@@ -17,6 +24,8 @@
         ],
         "@typescript-eslint/consistent-type-definitions": "type",
         "@typescript-eslint/strict-boolean-expressions": "off",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
         "@typescript-eslint/no-floating-promises": "off",
         "@typescript-eslint/comma-spacing": "off",
         "@typescript-eslint/return-await": "off",
