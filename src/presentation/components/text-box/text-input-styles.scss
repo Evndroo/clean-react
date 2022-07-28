@@ -1,0 +1,17 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+
+  input {
+    padding-right: 1.75rem;
+  }
+
+  .status {
+    position: absolute;
+    right: 0.5rem;
+    font-size: 0.75rem;
+    cursor: help;
+  }
+}
