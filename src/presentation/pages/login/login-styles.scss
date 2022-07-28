@@ -1,13 +1,12 @@
 @import "../../styles/colors.scss";
 
-
-*{
-  font-family: 'Roboto', sans-serif;
+* {
+  font-family: "Roboto", sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-body{
+body {
   background-color: $background;
 }
 
@@ -23,7 +22,7 @@ input[type="email"] {
   }
 }
 
-button{
+button {
   background-color: $primary;
   color: $white;
   line-height: 3rem;
@@ -36,40 +35,22 @@ button{
   &:hover {
     opacity: 0.8;
   }
-
 }
 
-.login{
+.login {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
 
-  .header{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: $primary;
-    border-top: 2rem solid $primaryDark; 
-
-    img {
-      margin-top: 1rem;
-    }
-
-    h1{
-      color: $white;
-      margin: 1rem 0 2rem;
-    }
-  }
-
-  .form{
+  .form {
     align-self: center;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     width: 400px;
     background-color: $white;
-    padding: 2.5rem;
+    padding: 2rem 2.5rem;
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px -1px $black;
 
@@ -80,37 +61,37 @@ button{
       text-transform: uppercase;
     }
 
-    .inputWrapper{
+    .inputWrapper {
       display: flex;
       flex-direction: column;
       justify-content: center;
       position: relative;
 
-      input{
+      input {
         padding-right: 1.75rem;
       }
 
-      .status{
+      .status {
         position: absolute;
         right: 0.5rem;
         font-size: 0.75rem;
         cursor: help;
       }
     }
-    .submit{
+
+    .submit {
       margin-top: 2.5rem;
     }
 
-    .link{
+    .link {
       text-align: center;
       color: $primary;
       text-transform: lowercase;
       cursor: pointer;
 
-      &:hover{
+      &:hover {
         text-decoration: underline;
       }
-
     }
 
     .errorWrapper {
@@ -118,20 +99,14 @@ button{
       flex-direction: column;
       justify-content: center;
       align-items: center;
-    
-    
+
       .spinner {
         margin-top: 2rem;
       }
-      .error{
+      .error {
         margin-top: 2rem;
         color: $primaryLight;
       }
     }
-  }
-
-  .footer{
-    height: 48px;
-    background-color: $primary;
   }
 }
