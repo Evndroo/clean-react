@@ -1,0 +1,16 @@
+@import "../../styles/colors.scss";
+
+.formStatus {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .spinner {
+    margin-top: 2rem;
+  }
+  .error {
+    margin-top: 2rem;
+    color: $primaryLight;
+  }
+}

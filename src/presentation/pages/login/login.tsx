@@ -1,7 +1,11 @@
 import React from "react";
 import Styles from "./login-styles.scss";
-import { Spinner, LoginHeader, Footer } from "@/presentation/components";
-import TextInput from "@/presentation/components/text-box/text-input";
+import {
+  LoginHeader,
+  Footer,
+  FormStatus,
+  TextInput,
+} from "@/presentation/components";
 
 const Login: React.FC = () => {
   return (
@@ -9,26 +13,17 @@ const Login: React.FC = () => {
       <LoginHeader></LoginHeader>
       <form className={Styles.form}>
         <h2>Login</h2>
-        <TextInput
-          placeholder="Digite seu e-mail"
-          name="email"
-          type="email"
-          status={false}
-        />
+        <TextInput placeholder="Digite seu e-mail" name="email" type="email" />
         <TextInput
           placeholder="Digite sua senha"
           type="password"
           name="password"
-          status={false}
         />
         <button className={Styles.submit} type="submit">
           Entrar
         </button>
         <span className={Styles.link}>Cadastre-se</span>
-        <div className={Styles.errorWrapper}>
-          <Spinner className={Styles.spinner} />
-          <span className={Styles.error}>Erro</span>
-        </div>
+        <FormStatus errorMessage="Erro" />
       </form>
       <Footer />
     </div>
