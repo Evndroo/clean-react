@@ -30,7 +30,7 @@ const Login: React.FC = () => {
             type="password"
             name="password"
           />
-          <button className={Styles.submit} type="submit">
+          <button className={Styles.submit} disabled type="submit">
             Entrar
           </button>
           <span className={Styles.link}>Cadastre-se</span>
