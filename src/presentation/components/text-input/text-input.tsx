@@ -7,6 +7,12 @@ type Props = React.DetailedHTMLProps<
   HTMLInputElement
 >;
 
+/**
+ *
+ * When using this component, make sure that the name attribute is equal
+ * to the property on errorData object inside the FormContext.
+ *
+ */
 const TextInput: React.FC<Props> = (props) => {
   const { errorData } = useContext(FormContext);
   const error = errorData[props.name];
