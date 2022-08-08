@@ -1,11 +1,21 @@
 import * as React from "react";
 import Login from "./login";
-import { render, screen } from "@testing-library/react";
+import { render, RenderResult, screen } from "@testing-library/react";
+
+type SutType = {
+  sut: RenderResult;
+};
+
+const makeSut = (): SutType => {
+  const sut = render(<Login />);
+  return {
+    sut,
+  };
+};
 
 describe("Login Component", () => {
   it("should render correctly with initial behavior", () => {
-    render(<Login />);
-
+    makeSut();
     const errorWrapper = screen.getByTestId("errorWrapper");
     expect(errorWrapper.childElementCount).toBe(0);
 
