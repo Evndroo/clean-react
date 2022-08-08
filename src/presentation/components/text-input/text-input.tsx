@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import Styles from "./text-input-styles.scss";
+import { FormContext } from "@/presentation/context";
 
 type Props = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -7,10 +8,26 @@ type Props = React.DetailedHTMLProps<
 >;
 
 const TextInput: React.FC<Props> = (props) => {
+  const { errorData } = useContext(FormContext);
+  const error = errorData[props.name];
+
+  const getStatus = (): string => {
+    return "🔴";
+  };
+  const getTitle = (): string => {
+    return error;
+  };
+
   return (
     <div className={Styles.inputWrapper}>
       <input {...props} />
-      <span className={Styles.status}>🔴</span>
+      <span
+        data-testid={`${props.name}-status`}
+        title={getTitle()}
+        className={Styles.status}
+      >
+        {getStatus()}
+      </span>
     </div>
   );
 };

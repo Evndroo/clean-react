@@ -1,8 +1,14 @@
 import { createContext } from "react";
 
 export type FormContextType = {
-  isLoading: boolean;
-  errorMessage?: string;
+  formData: {
+    isLoading: boolean;
+  };
+  errorData: {
+    email: string;
+    password: string;
+    form: string;
+  };
 };
 
 export const FormContext = createContext<FormContextType>(null);

@@ -10,14 +10,19 @@ import {
 } from "@/presentation/components";
 
 const Login: React.FC = () => {
-  const [formData] = useState<FormContextType>({
+  const [formData] = useState({
     isLoading: false,
+  });
+  const [errorData] = useState({
+    email: "Campo obrigatório",
+    password: "Campo obrigatório",
+    form: "",
   });
 
   return (
     <div className={Styles.login}>
       <LoginHeader></LoginHeader>
-      <FormContext.Provider value={formData}>
+      <FormContext.Provider value={{ errorData, formData }}>
         <form className={Styles.form}>
           <h2>Login</h2>
           <TextInput
