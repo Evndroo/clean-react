@@ -1,14 +1,17 @@
 import { createContext } from "react";
 
+type FormData = {
+  isLoading: boolean;
+  email: string;
+  emailError: string;
+  password: string;
+  passwordError: string;
+  formError: string;
+};
+
 export type FormContextType = {
-  formData: {
-    isLoading: boolean;
-  };
-  errorData: {
-    email: string;
-    password: string;
-    form: string;
-  };
+  formData: FormData;
+  setFormData: (formData: FormData) => void;
 };
 
 export const FormContext = createContext<FormContextType>(null);

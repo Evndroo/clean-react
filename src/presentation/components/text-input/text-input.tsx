@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { ChangeEvent, useContext } from "react";
 import Styles from "./text-input-styles.scss";
 import { FormContext } from "@/presentation/context";
 
@@ -14,19 +14,27 @@ type Props = React.DetailedHTMLProps<
  *
  */
 const TextInput: React.FC<Props> = (props) => {
-  const { errorData } = useContext(FormContext);
-  const error = errorData[props.name];
+  const { formData, setFormData } = useContext(FormContext);
+  const error = formData[`${props.name}Error`];
 
   const getStatus = (): string => {
     return "🔴";
   };
+
   const getTitle = (): string => {
     return error;
   };
 
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [props.name]: event.target.value,
+    });
+  };
+
   return (
     <div className={Styles.inputWrapper}>
-      <input {...props} />
+      <input {...props} onChange={handleInputChange} />
       <span
         data-testid={`${props.name}-status`}
         title={getTitle()}
