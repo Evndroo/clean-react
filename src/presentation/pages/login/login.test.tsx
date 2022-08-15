@@ -65,4 +65,16 @@ describe("Login Component", () => {
 
     expect(validationSpy.input).toEqual({ email: emailStub });
   });
+
+  it("should call validation with correct values when password changes", () => {
+    const passwordStub = faker.internet.userName();
+    const { validationSpy } = makeSut();
+    const passwordInput = screen.getByPlaceholderText(
+      "Digite sua senha"
+    ) as HTMLInputElement;
+
+    fireEvent.input(passwordInput, { target: { value: passwordStub } });
+
+    expect(validationSpy.input).toEqual({ password: passwordStub });
+  });
 });
