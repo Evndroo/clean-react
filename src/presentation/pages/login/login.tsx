@@ -30,6 +30,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     validation.validate({ email: formData.email });
   }, [formData.email]);
 
+  useEffect(() => {
+    validation.validate({ password: formData.password });
+  }, [formData.password]);
+
   return (
     <div className={Styles.login}>
       <LoginHeader></LoginHeader>
