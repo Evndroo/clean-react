@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Styles from "./login-styles.scss";
 import { FormContext } from "@/presentation/context";
-import { Validation } from "@/protocols/validation";
+import { Validation } from "@/presentation/protocols/validation";
 
 import {
   LoginHeader,

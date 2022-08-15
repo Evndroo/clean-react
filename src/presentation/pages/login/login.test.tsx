@@ -1,7 +1,7 @@
 import * as React from "react";
 import Login from "./login";
 import { faker } from "@faker-js/faker";
-import { Validation } from "@/protocols/validation";
+import { ValidationMock } from "@/presentation/test";
 import {
   cleanup,
   fireEvent,
@@ -12,23 +12,11 @@ import {
 
 type SutType = {
   sut: RenderResult;
-  validationSpy: ValidationSpy;
+  validationSpy: ValidationMock;
 };
 
-class ValidationSpy implements Validation {
-  errorMessage: string;
-  fieldName: string;
-  fieldValue: string;
-
-  validate(fieldName: string, fieldValue: string): string {
-    this.fieldName = fieldName;
-    this.fieldValue = fieldValue;
-    return this.errorMessage;
-  }
-}
-
 const makeSut = (): SutType => {
-  const validationSpy = new ValidationSpy();
+  const validationSpy = new ValidationMock();
   const sut = render(<Login validation={validationSpy} />);
   return {
     sut,
