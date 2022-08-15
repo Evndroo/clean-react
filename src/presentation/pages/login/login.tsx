@@ -27,11 +27,11 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   });
 
   useEffect(() => {
-    validation.validate({ email: formData.email });
+    validation.validate("email", formData.email);
   }, [formData.email]);
 
   useEffect(() => {
-    validation.validate({ password: formData.password });
+    validation.validate("password", formData.password);
   }, [formData.password]);
 
   return (
