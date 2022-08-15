@@ -11,7 +11,7 @@ import {
 } from "@/presentation/components";
 
 type LoginProps = {
-  validation: Validation;
+  validation?: Validation;
 };
 
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
