@@ -20,18 +20,24 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   const [formData, setFormData] = useState({
     isLoading: false,
     email: "",
-    emailError: "Campo obrigatório",
+    emailError: "",
     password: "",
     passwordError: "Campo obrigatório",
     formError: "",
   });
 
   useEffect(() => {
-    validation.validate("email", formData.email);
+    setFormData({
+      ...formData,
+      emailError: validation.validate("email", formData.email),
+    });
   }, [formData.email]);
 
   useEffect(() => {
-    validation.validate("password", formData.password);
+    setFormData({
+      ...formData,
+      passwordError: validation.validate("password", formData.password),
+    });
   }, [formData.password]);
 
   return (
