@@ -46,22 +46,21 @@ describe("Login Component", () => {
     expect(passwordStatus.title).toBe(validationStub.errorMessage);
   });
 
-  it("Should show email error if Validation fails", () => {
+  it("Should show Login fields errors if Validation fails", () => {
     const { validationStub } = makeSut();
     const emailInput = screen.getByPlaceholderText("Digite seu e-mail");
     fireEvent.input(emailInput, { target: { value: faker.internet.email() } });
     const emailStatus = screen.getByTestId("email-status");
-    expect(emailStatus.title).toBe(validationStub.errorMessage);
-    expect(emailStatus.textContent).toBe("🔴");
-  });
 
-  it("should show password error if Validation fails", () => {
-    const { validationStub } = makeSut();
     const passwordInput = screen.getByPlaceholderText("Digite sua senha");
     fireEvent.input(passwordInput, {
       target: { value: faker.internet.password() },
     });
     const passwordStatus = screen.getByTestId("password-status");
+
+    expect(emailStatus.title).toBe(validationStub.errorMessage);
+    expect(emailStatus.textContent).toBe("🔴");
+
     expect(passwordStatus.title).toBe(validationStub.errorMessage);
     expect(passwordStatus.textContent).toBe("🔴");
   });
