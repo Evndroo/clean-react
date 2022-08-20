@@ -4,37 +4,28 @@ import { faker } from "@faker-js/faker";
 import { ValidationStub } from "@/presentation/test";
 import {
   render,
-  RenderResult,
   fireEvent,
   cleanup,
   screen,
 } from "@testing-library/react";
 
-type SutTypes = {
-  sut: RenderResult;
-  validationStub: ValidationStub;
-};
-
 type SutParams = {
   validationError: string;
 };
 
-const makeSut = (params?: SutParams): SutTypes => {
+const makeSut = (params?: SutParams) => {
   const validationStub = new ValidationStub();
   validationStub.errorMessage = params?.validationError;
-  const sut = render(<Login validation={validationStub} />);
-  return {
-    sut,
-    validationStub,
-  };
+  render(<Login validation={validationStub} />);
 };
 
 describe("Login Component", () => {
   afterEach(cleanup);
 
   it("should render correctly with initial behavior", () => {
-    const { validationStub } = makeSut({
-      validationError: faker.random.word(),
+    const validationError = faker.random.word();
+    makeSut({
+      validationError,
     });
 
     const errorWrapper = screen.getByTestId("errorWrapper");
@@ -45,16 +36,17 @@ describe("Login Component", () => {
 
     const emailStatus = screen.getByTestId("email-status");
     expect(emailStatus.textContent).toBe("🔴");
-    expect(emailStatus.title).toBe(validationStub.errorMessage);
+    expect(emailStatus.title).toBe(validationError);
 
     const passwordStatus = screen.getByTestId("password-status");
     expect(passwordStatus.textContent).toBe("🔴");
-    expect(passwordStatus.title).toBe(validationStub.errorMessage);
+    expect(passwordStatus.title).toBe(validationError);
   });
 
   it("should show Login fields errors if Validation fails", () => {
-    const { validationStub } = makeSut({
-      validationError: faker.random.word(),
+    const validationError = faker.random.word();
+    makeSut({
+      validationError,
     });
 
     const emailInput = screen.getByPlaceholderText("Digite seu e-mail");
@@ -67,16 +59,15 @@ describe("Login Component", () => {
     });
     const passwordStatus = screen.getByTestId("password-status");
 
-    expect(emailStatus.title).toBe(validationStub.errorMessage);
+    expect(emailStatus.title).toBe(validationError);
     expect(emailStatus.textContent).toBe("🔴");
 
-    expect(passwordStatus.title).toBe(validationStub.errorMessage);
+    expect(passwordStatus.title).toBe(validationError);
     expect(passwordStatus.textContent).toBe("🔴");
   });
 
   it("should show Login fields success if Validation succeed", () => {
-    const { validationStub } = makeSut();
-    validationStub.errorMessage = "";
+    makeSut();
 
     const emailInput = screen.getByPlaceholderText("Digite seu e-mail");
     fireEvent.input(emailInput, { target: { value: faker.internet.email() } });
@@ -96,8 +87,7 @@ describe("Login Component", () => {
   });
 
   it("should enable submit button when form is valid", () => {
-    const { validationStub } = makeSut();
-    validationStub.errorMessage = "";
+    makeSut();
 
     const emailInput = screen.getByPlaceholderText("Digite seu e-mail");
     fireEvent.input(emailInput, { target: { value: faker.internet.email() } });
