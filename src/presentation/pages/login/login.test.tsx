@@ -92,10 +92,12 @@ describe("Login Component", () => {
 
   it("should enable submit button when form is valid", () => {
     makeSut();
-    const submitButton = screen.getByText("Entrar") as HTMLButtonElement;
-
     fillForm();
 
-    expect(submitButton.disabled).toBeFalsy();
+    fireEvent.click(screen.getByText("Entrar"));
+
+    const spinner = screen.getByTestId("spinner");
+
+    expect(spinner).toBeTruthy();
   });
 });

@@ -34,7 +34,8 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     });
   }, [formData.email, formData.password]);
 
-  const handleClick = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setFormData({
       ...formData,
       isLoading: true,
@@ -45,7 +46,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     <div className={Styles.login}>
       <LoginHeader />
       <FormContext.Provider value={{ formData, setFormData }}>
-        <form className={Styles.form}>
+        <form onSubmit={handleSubmit} className={Styles.form}>
           <h2>Login</h2>
           <TextInput
             placeholder="Digite seu e-mail"
@@ -60,7 +61,6 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
           <button
             className={Styles.submit}
             disabled={!!formData.emailError || !!formData.passwordError}
-            onClick={handleClick}
             type="submit"
           >
             Entrar
