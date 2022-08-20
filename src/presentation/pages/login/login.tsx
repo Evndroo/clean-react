@@ -50,7 +50,11 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
             type="password"
             name="password"
           />
-          <button className={Styles.submit} disabled type="submit">
+          <button
+            className={Styles.submit}
+            disabled={!!formData.emailError || !!formData.passwordError}
+            type="submit"
+          >
             Entrar
           </button>
           <span className={Styles.link}>Cadastre-se</span>
