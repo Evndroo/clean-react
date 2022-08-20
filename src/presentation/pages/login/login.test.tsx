@@ -15,9 +15,13 @@ type SutTypes = {
   validationStub: ValidationStub;
 };
 
-const makeSut = (): SutTypes => {
+type SutParams = {
+  validationError: string;
+};
+
+const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub();
-  validationStub.errorMessage = faker.random.word();
+  validationStub.errorMessage = params?.validationError;
   const sut = render(<Login validation={validationStub} />);
   return {
     sut,
@@ -29,7 +33,9 @@ describe("Login Component", () => {
   afterEach(cleanup);
 
   it("should render correctly with initial behavior", () => {
-    const { validationStub } = makeSut();
+    const { validationStub } = makeSut({
+      validationError: faker.random.word(),
+    });
 
     const errorWrapper = screen.getByTestId("errorWrapper");
     expect(errorWrapper.childElementCount).toBe(0);
@@ -47,7 +53,9 @@ describe("Login Component", () => {
   });
 
   it("should show Login fields errors if Validation fails", () => {
-    const { validationStub } = makeSut();
+    const { validationStub } = makeSut({
+      validationError: faker.random.word(),
+    });
 
     const emailInput = screen.getByPlaceholderText("Digite seu e-mail");
     fireEvent.input(emailInput, { target: { value: faker.internet.email() } });
