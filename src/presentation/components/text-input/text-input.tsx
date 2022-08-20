@@ -22,7 +22,7 @@ const TextInput: React.FC<Props> = (props) => {
   };
 
   const getTitle = (): string => {
-    return error ? error : "Tudo certo!";
+    return error || "Tudo certo!";
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
