@@ -34,6 +34,13 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     });
   }, [formData.email, formData.password]);
 
+  const handleClick = () => {
+    setFormData({
+      ...formData,
+      isLoading: true,
+    });
+  };
+
   return (
     <div className={Styles.login}>
       <LoginHeader />
@@ -53,6 +60,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
           <button
             className={Styles.submit}
             disabled={!!formData.emailError || !!formData.passwordError}
+            onClick={handleClick}
             type="submit"
           >
             Entrar
