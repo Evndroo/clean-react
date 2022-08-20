@@ -1,7 +1,7 @@
 import Login from "./login";
 import React from "react";
 import { faker } from "@faker-js/faker";
-import { ValidationMock } from "@/presentation/test";
+import { ValidationStub } from "@/presentation/test";
 import {
   render,
   RenderResult,
@@ -12,11 +12,11 @@ import {
 
 type SutTypes = {
   sut: RenderResult;
-  validationStub: ValidationMock;
+  validationStub: ValidationStub;
 };
 
 const makeSut = (): SutTypes => {
-  const validationStub = new ValidationMock();
+  const validationStub = new ValidationStub();
   validationStub.errorMessage = faker.random.word();
   const sut = render(<Login validation={validationStub} />);
   return {

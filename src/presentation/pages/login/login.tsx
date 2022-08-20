@@ -22,7 +22,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     email: "",
     emailError: "",
     password: "",
-    passwordError: "Campo obrigatório",
+    passwordError: "",
     formError: "",
   });
 
@@ -30,19 +30,13 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     setFormData({
       ...formData,
       emailError: validation.validate("email", formData.email),
-    });
-  }, [formData.email]);
-
-  useEffect(() => {
-    setFormData({
-      ...formData,
       passwordError: validation.validate("password", formData.password),
     });
-  }, [formData.password]);
+  }, [formData.email, formData.password]);
 
   return (
     <div className={Styles.login}>
-      <LoginHeader></LoginHeader>
+      <LoginHeader />
       <FormContext.Provider value={{ formData, setFormData }}>
         <form className={Styles.form}>
           <h2>Login</h2>
