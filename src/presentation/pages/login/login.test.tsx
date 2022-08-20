@@ -1,13 +1,8 @@
 import Login from "./login";
 import React from "react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { faker } from "@faker-js/faker";
 import { ValidationStub } from "@/presentation/test";
-import {
-  render,
-  fireEvent,
-  cleanup,
-  screen,
-} from "@testing-library/react";
 
 type SutParams = {
   validationError: string;
@@ -17,6 +12,25 @@ const makeSut = (params?: SutParams) => {
   const validationStub = new ValidationStub();
   validationStub.errorMessage = params?.validationError;
   render(<Login validation={validationStub} />);
+};
+
+const fillForm = () => {
+  const emailInput = screen.getByPlaceholderText(
+    "Digite seu e-mail"
+  ) as HTMLInputElement;
+  fireEvent.input(emailInput, { target: { value: faker.internet.email() } });
+
+  const passwordInput = screen.getByPlaceholderText(
+    "Digite sua senha"
+  ) as HTMLInputElement;
+  fireEvent.input(passwordInput, {
+    target: { value: faker.internet.password() },
+  });
+
+  return {
+    emailInput,
+    passwordInput,
+  };
 };
 
 describe("Login Component", () => {
@@ -49,14 +63,9 @@ describe("Login Component", () => {
       validationError,
     });
 
-    const emailInput = screen.getByPlaceholderText("Digite seu e-mail");
-    fireEvent.input(emailInput, { target: { value: faker.internet.email() } });
-    const emailStatus = screen.getByTestId("email-status");
+    fillForm();
 
-    const passwordInput = screen.getByPlaceholderText("Digite sua senha");
-    fireEvent.input(passwordInput, {
-      target: { value: faker.internet.password() },
-    });
+    const emailStatus = screen.getByTestId("email-status");
     const passwordStatus = screen.getByTestId("password-status");
 
     expect(emailStatus.title).toBe(validationError);
@@ -69,14 +78,9 @@ describe("Login Component", () => {
   it("should show Login fields success if Validation succeed", () => {
     makeSut();
 
-    const emailInput = screen.getByPlaceholderText("Digite seu e-mail");
-    fireEvent.input(emailInput, { target: { value: faker.internet.email() } });
-    const emailStatus = screen.getByTestId("email-status");
+    fillForm();
 
-    const passwordInput = screen.getByPlaceholderText("Digite sua senha");
-    fireEvent.input(passwordInput, {
-      target: { value: faker.internet.password() },
-    });
+    const emailStatus = screen.getByTestId("email-status");
     const passwordStatus = screen.getByTestId("password-status");
 
     expect(emailStatus.title).toBe("Tudo certo!");
@@ -88,16 +92,9 @@ describe("Login Component", () => {
 
   it("should enable submit button when form is valid", () => {
     makeSut();
-
-    const emailInput = screen.getByPlaceholderText("Digite seu e-mail");
-    fireEvent.input(emailInput, { target: { value: faker.internet.email() } });
-
-    const passwordInput = screen.getByPlaceholderText("Digite sua senha");
-    fireEvent.input(passwordInput, {
-      target: { value: faker.internet.password() },
-    });
-
     const submitButton = screen.getByText("Entrar") as HTMLButtonElement;
+
+    fillForm();
 
     expect(submitButton.disabled).toBeFalsy();
   });
