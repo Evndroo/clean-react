@@ -94,4 +94,21 @@ describe("Login Component", () => {
     expect(passwordStatus.title).toBe("Tudo certo!");
     expect(passwordStatus.textContent).toBe("🟢");
   });
+
+  it("should enable submit button when form is valid", () => {
+    const { validationStub } = makeSut();
+    validationStub.errorMessage = "";
+
+    const emailInput = screen.getByPlaceholderText("Digite seu e-mail");
+    fireEvent.input(emailInput, { target: { value: faker.internet.email() } });
+
+    const passwordInput = screen.getByPlaceholderText("Digite sua senha");
+    fireEvent.input(passwordInput, {
+      target: { value: faker.internet.password() },
+    });
+
+    const submitButton = screen.getByText("Entrar") as HTMLButtonElement;
+
+    expect(submitButton.disabled).toBeFalsy();
+  });
 });
