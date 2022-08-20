@@ -18,11 +18,11 @@ const TextInput: React.FC<Props> = (props) => {
   const error = formData[`${props.name}Error`];
 
   const getStatus = (): string => {
-    return "🔴";
+    return error ? "🔴" : "🟢";
   };
 
   const getTitle = (): string => {
-    return error;
+    return error ? error : "Tudo certo!";
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
